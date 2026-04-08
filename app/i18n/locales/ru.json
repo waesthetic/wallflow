@@ -1,0 +1,206 @@
+{
+  "auth": {
+    "account": "Аккаунт",
+    "accountDeleteFailed": "Ссылка недействительна",
+    "accountDeleteFailedDesc": "Ссылка устарела или уже была использована.",
+    "back": "Назад",
+    "backToLogin": "Вернуться ко входу",
+    "checkEmail": "Проверьте почту!",
+    "checkEmailDesc": "Мы отправили письмо с подтверждением. Перейдите по ссылке для активации.",
+    "confirmPassword": "Повторите пароль",
+    "email": "Email",
+    "emailSent": "Письмо отправлено",
+    "emailSentDesc": "Если аккаунт существует — отправили инструкции по сбросу.",
+    "enterPassword": "Введите пароль",
+    "forgotPassword": "Забыли пароль?",
+    "forgotPasswordDesc": "Введите email — вышлем ссылку для сброса пароля.",
+    "genericError": "Что-то пошло не так",
+    "goToProfile": "Профиль",
+    "haveAccount": "Уже есть аккаунт?",
+    "invalidEmail": "Некорректный email",
+    "login": "Войти",
+    "loginError": "Ошибка входа",
+    "loginWithGithub": "Войти через GitHub",
+    "loginWithGoogle": "Войти через Google",
+    "name": "Имя",
+    "namePlaceholder": "Иван Иванов",
+    "nameTooShort": "Минимум 2 символа",
+    "newAccount": "Начало работы",
+    "newPassword": "Новый пароль",
+    "newPasswordDesc": "Введите новый пароль ниже.",
+    "noAccount": "Нет аккаунта?",
+    "noEmail": "Провайдер не вернул email. Попробуйте другой способ.",
+    "oauthFailed": "Ошибка входа через OAuth. Попробуйте снова.",
+    "or": "или",
+    "password": "Пароль",
+    "passwordChanged": "Пароль изменён",
+    "passwordChangedDesc": "Теперь можете войти с новым паролем.",
+    "passwordPlaceholder": "Минимум 8 символов",
+    "passwordTooShort": "Минимум 8 символов",
+    "passwordsDoNotMatch": "Пароли не совпадают",
+    "redirecting": "Перенаправление...",
+    "register": "Регистрация",
+    "registerError": "Ошибка регистрации",
+    "savePassword": "Сохранить пароль",
+    "sendLink": "Отправить ссылку",
+    "verifyEmail": "Проверка Email",
+    "verifyEmailFailed": "Ссылка недоступна",
+    "verifyEmailFailedDesc": "Ссылка устарела или уже была использована.",
+    "verifyEmailSuccess": "Почта подтверждена",
+    "verifyEmailSuccessDesc": "Аккаунт успешно активирован.",
+    "welcome": "С возвращением"
+  },
+
+  "cart": {
+    "addToCart": "Добавить в корзину",
+    "browseShop": "Перейти в магазин",
+    "description": "Ваша лучшая покупка!",
+    "empty": "Ваша корзина пуста",
+    "inCart": "Уже в корзине",
+    "itemAdded": "Добавлено в корзину",
+    "itemRemoved": "Удалено из корзины",
+    "label": "Корзина",
+    "placeOrder": "Оформить заказ",
+    "total": "Итого"
+  },
+
+  "contact": {
+    "email": "Почта",
+    "emailInvalid": "Некорректный email адрес",
+    "firstName": "Имя",
+    "firstNameRequired": "Необходимо ввести имя",
+    "lastName": "Фамилия",
+    "lastNameRequired": "Необходимо ввести фамилию",
+    "message": "Сообщение",
+    "messageError": "Ошибка отправки!",
+    "messageErrorDescription": "Не удалось отправить сообщение. Попробуйте позже.",
+    "messageMax": "Должно быть максимум 1000 символов",
+    "messageMin": "Должно быть минимум 8 символов",
+    "messageRequired": "Необходимо сообщение",
+    "messageSent": "Сообщение отправлено!",
+    "messageSentDescription": "Мы свяжемся с вами в ближайшее время",
+    "privacyNote": "Ваши данные защищены и не передаются третьим лицам.",
+    "responseTime": "Мы ответим вам в течение 24 часов.",
+    "send": "Отправить",
+    "title": "Напишите нам"
+  },
+
+  "error": {
+    "contact": "Написать нам",
+    "contactFailed": "Не удалось отправить сообщение. Попробуйте позже.",
+    "goHome": "На главную",
+    "notFound": "Страница, которую вы ищете, не существует.",
+    "serverError": "Произошла непредвиденная ошибка. Попробуйте позже.",
+    "status": "Что-то пошло не так"
+  },
+
+  "landing": {
+    "about": {
+      "title": "Обо мне",
+      "description": "Я студент направления программной инженерии в университете MIET и изучаю фулстек-программирование с использованием TypeScript + Vue3 + Nuxt. Этот проект — результат моей подготовки, и я буду рад услышать ваши отзывы!"
+    },
+
+    "faq": {
+      "title": "Вопросы и ответы",
+      "description": "Всё, что нужно знать о Wallflow.",
+      "generalCategory": "Общее",
+      "ordersCategory": "Заказы",
+      "formatsQuestion": "Какие форматы включены?",
+      "formatsAnswer": "Каждый пакет включает обои в нескольких разрешениях, оптимизированных для компьютера, телефона и планшета.",
+      "commercialQuestion": "Можно ли использовать обои в коммерческих целях?",
+      "commercialAnswer": "Обои лицензированы только для личного использования. Свяжитесь с нами для получения информации о коммерческой лицензии.",
+      "downloadQuestion": "Как скачать обои?",
+      "downloadAnswer": "Перейдите на страницу «Заказы» и нажмите кнопку «Скачать» рядом с вашим заказом.",
+      "refundQuestion": "Возможен ли возврат средств?",
+      "refundAnswer": "В связи с цифровым характером продуктов возврат средств невозможен после начала загрузки."
+    },
+
+    "hero": {
+      "headline": "Исследуй своё вдохновление",
+      "description": "Премиальные пакеты обоев. Подборки вручную, мгновенная загрузка."
+    },
+
+    "stack": {
+      "framework": "Фреймворк",
+      "frontend": "Фронтенд",
+      "language": "Язык",
+      "title": "Набор технологий"
+    }
+  },
+
+  "nav": {
+    "browseShop": "Перейти в магазин",
+    "contactMe": "Связаться со мной",
+    "contacts": "Контакты",
+    "home": "Главная",
+    "language": "Язык",
+    "login": "Вход",
+    "logout": "Выход",
+    "navigation": "Навигация",
+    "profile": "Профиль",
+    "shop": "Магазин",
+    "user": "Пользователь"
+  },
+
+  "orders": {
+    "browseShop": "Перейти в магазин",
+    "confirmed": "Заказ подтвержден!",
+    "date": "Дата",
+    "download": "Скачать",
+    "empty": "У вас еще нет заказов",
+    "goHome": "На главную",
+    "id": "Номер заказа",
+    "label": "Заказы",
+    "status": "Статус",
+    "statusCompleted": "Выполнен",
+    "statusFailed": "Ошибка",
+    "statusPaid": "Оплачен",
+    "statusPending": "В ожидании",
+    "subtitle": "История ваших заказов",
+    "title": "Заказ №"
+  },
+
+  "page": {
+    "contacts": "Контакты",
+    "description": "Вдохновляющие пакеты обоев",
+    "error": "Ошибка",
+    "home": "Главная",
+    "login": "Вход",
+    "products": "Магазин",
+    "welcome": "Добро пожаловать в WallFlow!"
+  },
+
+  "product": {
+    "packTitle": "Набор «{title}»",
+    "wallpaperCount": "{count} обоев"
+  },
+
+  "profile": {
+    "afternoon": "Великолепного дня, ",
+    "evening": "Приятного вечера, ",
+    "label": "Профиль",
+    "morning": "Чудесного утра, ",
+    "night": "Спокойной ночи, ",
+    "orderCount": "{count} заказов"
+  },
+
+  "settings": {
+    "avatar": "Аватар",
+    "avatarUrl": "Ссылка на изображение",
+    "changePassword": "Изменить пароль",
+    "changePasswordDesc": "Мы отправим ссылку для сброса на вашу почту.",
+    "connectedAccounts": "Привязанные аккаунты",
+    "dangerZone": "Опасная зона",
+    "deleteAccount": "Удалить аккаунт",
+    "deleteAccountDesc": "Это действие необратимо. Введите email для подтверждения.",
+    "error": "Что-то пошло не так",
+    "label": "Настройки",
+    "name": "Имя",
+    "noConnectedAccounts": "Нет привязанных аккаунтов",
+    "oauthPasswordNote": "Вы вошли через Google или GitHub. Пароль для сброса отсутствует.",
+    "save": "Сохранить",
+    "saved": "Настройки сохранены",
+    "typeEmail": "Введите ваш email для подтверждения",
+    "upload": "Загрузить"
+  }
+}

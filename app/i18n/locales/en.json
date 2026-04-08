@@ -1,0 +1,206 @@
+{
+  "auth": {
+    "account": "Account",
+    "accountDeleteFailed": "Link is invalid",
+    "accountDeleteFailedDesc": "The link may have expired or already been used.",
+    "back": "Back",
+    "backToLogin": "Back to sign in",
+    "checkEmail": "Check your email!",
+    "checkEmailDesc": "We sent a confirmation link. Click it to activate your account.",
+    "confirmPassword": "Confirm password",
+    "email": "Email",
+    "emailSent": "Email sent",
+    "emailSentDesc": "If an account exists, we sent reset instructions.",
+    "enterPassword": "Enter your password",
+    "forgotPassword": "Forgot password?",
+    "forgotPasswordDesc": "Enter your email and we'll send a reset link.",
+    "genericError": "Something went wrong",
+    "goToProfile": "Profile",
+    "haveAccount": "Already have an account?",
+    "invalidEmail": "Invalid email",
+    "login": "Sign in",
+    "loginError": "Sign in failed",
+    "loginWithGithub": "Continue with GitHub",
+    "loginWithGoogle": "Continue with Google",
+    "name": "Name",
+    "namePlaceholder": "John Doe",
+    "nameTooShort": "Minimum 2 characters",
+    "newAccount": "Get started",
+    "newPassword": "New password",
+    "newPasswordDesc": "Enter your new password below.",
+    "noAccount": "Don't have an account?",
+    "noEmail": "Provider didn't return an email. Try another method.",
+    "oauthFailed": "OAuth sign in failed. Please try again.",
+    "or": "or",
+    "password": "Password",
+    "passwordChanged": "Password changed",
+    "passwordChangedDesc": "You can now sign in with your new password.",
+    "passwordPlaceholder": "At least 8 characters",
+    "passwordTooShort": "Minimum 8 characters",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "redirecting": "Redirecting...",
+    "register": "Sign up",
+    "registerError": "Registration failed",
+    "savePassword": "Save password",
+    "sendLink": "Send link",
+    "verifyEmail": "Email Verification",
+    "verifyEmailFailed": "Link is invalid",
+    "verifyEmailFailedDesc": "The link may have expired or already been used.",
+    "verifyEmailSuccess": "Email verified",
+    "verifyEmailSuccessDesc": "Your account has been successfully activated.",
+    "welcome": "Welcome back"
+  },
+
+  "cart": {
+    "addToCart": "Add to cart",
+    "browseShop": "Browse the shop",
+    "description": "Your best purchase!",
+    "empty": "Your cart is empty",
+    "inCart": "Already in cart",
+    "itemAdded": "Added to cart",
+    "itemRemoved": "Removed from cart",
+    "label": "Cart",
+    "placeOrder": "Place Order",
+    "total": "Total"
+  },
+
+  "contact": {
+    "email": "Email",
+    "emailInvalid": "Invalid email address",
+    "firstName": "First name",
+    "firstNameRequired": "First name is required",
+    "lastName": "Last name",
+    "lastNameRequired": "Last name is required",
+    "message": "Message",
+    "messageError": "Sending error!",
+    "messageErrorDescription": "Failed to send. Try it later.",
+    "messageMax": "Must be a maximum of 1000 characters",
+    "messageMin": "Must be at least 8 characters",
+    "messageRequired": "Message required",
+    "messageSent": "Message sent!",
+    "messageSentDescription": "We'll get back to you shortly.",
+    "privacyNote": "Your data is protected and never shared with third parties.",
+    "responseTime": "We'll respond to you within 24 hours.",
+    "send": "Send",
+    "title": "Write to us"
+  },
+
+  "error": {
+    "contact": "Contact us",
+    "contactFailed": "Failed to send. Try it later.",
+    "goHome": "Go home",
+    "notFound": "The page you are looking for does not exist.",
+    "serverError": "An unexpected error occurred. Please try again later.",
+    "status": "Something went wrong"
+  },
+
+  "landing": {
+    "about": {
+      "title": "About me",
+      "description": "As a Software Engineering student at MIET University, I'm learning fullstack programming using TypeScript + Vue3 + Nuxt. This project is the result of my preparation, and I'd love to hear your feedback!"
+    },
+
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "description": "Everything you need to know about Wallflow.",
+      "generalCategory": "General",
+      "ordersCategory": "Orders",
+      "formatsQuestion": "What formats are included?",
+      "formatsAnswer": "Each pack includes wallpapers in multiple resolutions optimized for desktop, mobile, and tablet screens.",
+      "commercialQuestion": "Can I use wallpapers commercially?",
+      "commercialAnswer": "Wallpapers are licensed for personal use only. Contact us for commercial licensing details.",
+      "downloadQuestion": "How do I download my pack?",
+      "downloadAnswer": "Go to your Orders page and click the Download button next to your order.",
+      "refundQuestion": "Do you offer refunds?",
+      "refundAnswer": "Due to the digital nature of the products, we do not offer refunds once a download has been initiated."
+    },
+
+    "hero": {
+      "headline": "Explore your inspire",
+      "description": "Premium wallpaper packs. Hand-picked collections, instantly downloadable."
+    },
+
+    "stack": {
+      "framework": "Framework",
+      "frontend": "Frontend",
+      "language": "Language",
+      "title": "Stack"
+    }
+  },
+
+  "nav": {
+    "browseShop": "Browse the shop",
+    "contactMe": "Contact me",
+    "contacts": "Contact",
+    "home": "Home",
+    "language": "Language",
+    "login": "Login",
+    "logout": "Log out",
+    "navigation": "Navigation",
+    "profile": "Profile",
+    "shop": "Shop",
+    "user": "User"
+  },
+
+  "orders": {
+    "browseShop": "Browse the shop",
+    "confirmed": "Order confirmed!",
+    "date": "Date",
+    "download": "Download",
+    "empty": "You have no orders yet",
+    "goHome": "Go home",
+    "id": "Order ID",
+    "label": "Orders",
+    "status": "Status",
+    "statusCompleted": "Completed",
+    "statusFailed": "Failed",
+    "statusPaid": "Paid",
+    "statusPending": "Pending",
+    "subtitle": "History of your orders",
+    "title": "Order #"
+  },
+
+  "page": {
+    "contacts": "Contact",
+    "description": "Inspiring wallpaper packs",
+    "error": "Error",
+    "home": "Home page",
+    "login": "Login",
+    "products": "Shop",
+    "welcome": "Welcome to WallFlow!"
+  },
+
+  "product": {
+    "packTitle": "{title} Pack",
+    "wallpaperCount": "{count} wallpapers"
+  },
+
+  "profile": {
+    "afternoon": "Wonderful day, ",
+    "evening": "Lovely evening, ",
+    "label": "Profile",
+    "morning": "Marvelous morning, ",
+    "night": "Peaceful night, ",
+    "orderCount": "{count} orders"
+  },
+
+  "settings": {
+    "avatar": "Avatar",
+    "avatarUrl": "Image URL",
+    "changePassword": "Change password",
+    "changePasswordDesc": "We'll send a reset link to your email.",
+    "connectedAccounts": "Connected accounts",
+    "dangerZone": "Danger zone",
+    "deleteAccount": "Delete account",
+    "deleteAccountDesc": "This action is irreversible. Type your email to confirm.",
+    "error": "Something went wrong",
+    "label": "Settings",
+    "name": "Name",
+    "noConnectedAccounts": "No connected accounts",
+    "oauthPasswordNote": "You signed in with Google or GitHub. No password to reset.",
+    "save": "Save",
+    "saved": "Settings saved",
+    "typeEmail": "Type your email to confirm",
+    "upload": "Upload"
+  }
+}
