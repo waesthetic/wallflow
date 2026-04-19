@@ -32,10 +32,9 @@ export default defineNuxtConfig({
       tokensPerInterval: 1000,
       interval: 60000,
       driver: {
-        name: 'upstash',
+        name: 'redis',
         options: {
-          url: process.env.UPSTASH_REDIS_REST_URL,
-          token: process.env.UPSTASH_REDIS_REST_TOKEN,
+          url: process.env.REDIS_URL,
         }
       }
     }
