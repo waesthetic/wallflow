@@ -61,11 +61,16 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
   const verifyUrl = `${config.appUrl}/auth/verify-email?token=${token}`
 
-  await sendEmail({
-    to: newUser!.email,
-    subject: 'Confirm your email — Wallflow',
-    html: emailVerificationHTML(verifyUrl, name ?? null),
-  })
+  try {
+    await sendEmail({
+      to: newUser!.email,
+      subject: 'Confirm your email — Wallflow',
+      html: emailVerificationHTML(verifyUrl, name ?? null),
+    })
+  } catch {
+    await db.delete(users).where(eq(users.id, newUser!.id))
+    throw createError({ statusCode: 500, message: 'Failed to send verification email. Please try again.' })
+  }
 
   return {
     message: 'Check your email to confirm your account',
