@@ -2,7 +2,7 @@
 definePageMeta({ middleware: 'auth' })
 
 const { t } = useI18n()
-const { items, count, removeFromCart, fetchCart } = useCart()
+const { items, count, removeFromCart } = useCart()
 const { formatPrice } = useFormatPrice()
 const { currency } = useCurrency()
 const localePath = useLocalePath()
@@ -10,8 +10,6 @@ const localePath = useLocalePath()
 useHead({
   title: computed(() => t('cart.label'))
 })
-
-onMounted(() => fetchCart())
 
 const total = computed(() => items.value.reduce((sum, item) => sum + item.products.price, 0))
 

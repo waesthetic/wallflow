@@ -6,30 +6,26 @@ type CartItemWithProduct = {
 }
 
 export function useCart() {
-  const items = useState<CartItemWithProduct[]>('cart-items', () => [])
   const toast = useToast()
   const { t } = useI18n()
   const { currency } = useCurrency()
   const { $csrfFetch } = useNuxtApp()
 
-  async function fetchCart() {
-    try {
-      const data = await $fetch<{ items: CartItemWithProduct[] }>('/api/cart', {
-        query: { currency: currency.value }
-      })
-      items.value = data.items
-    } catch {
-      toast.add({ title: t('error.status'), color: 'error' })
-    }
-  }
+  const { data, refresh } = useAsyncData(
+    'cart',
+    () => $fetch<{ items: CartItemWithProduct[] }>('/api/cart', {
+      query: { currency: currency.value }
+    }),
+    { watch: [currency] }
+  )
+
+  const items = computed(() => data.value?.items ?? [])
+  const count = computed(() => items.value.length)
 
   async function addToCart(productId: string) {
     try {
-      await $csrfFetch('/api/cart', {
-        method: 'POST',
-        body: { productId }
-      })
-      await fetchCart()
+      await $csrfFetch('/api/cart', { method: 'POST', body: { productId } })
+      await refresh()
       toast.add({ title: t('cart.itemAdded'), color: 'success' })
     } catch {
       toast.add({ title: t('error.status'), color: 'error' })
@@ -38,17 +34,13 @@ export function useCart() {
 
   async function removeFromCart(id: string) {
     try {
-      await $csrfFetch(`/api/cart/${id}`, {
-        method: 'DELETE'
-      })
-      await fetchCart()
+      await $csrfFetch(`/api/cart/${id}`, { method: 'DELETE' })
+      await refresh()
       toast.add({ title: t('cart.itemRemoved'), color: 'success' })
     } catch {
       toast.add({ title: t('error.status'), color: 'error' })
     }
   }
 
-  const count = computed(() => items.value.length)
-
-  return { items, count, fetchCart, addToCart, removeFromCart }
+  return { items, count, addToCart, removeFromCart }
 }
