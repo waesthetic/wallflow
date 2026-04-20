@@ -4,7 +4,7 @@ import type { NavigationMenuItem } from '@nuxt/ui'
 const route = useRoute()
 const localePath = useLocalePath()
 const { locale, locales, setLocale, t } = useI18n()
-const { user, clear } = useUserSession()
+const { user, fetch: refreshSession } = useUserSession()
 const { $csrfFetch } = useNuxtApp()
 const { data } = await useProducts()
 const { count } = useCart()
@@ -53,7 +53,7 @@ const userMenuItems = computed(() => [[
     icon: 'i-lucide-log-out',
     onSelect: async () => {
       await $csrfFetch('/api/auth/logout', { method: 'POST' })
-      await clear()
+      await refreshSession()
       await navigateTo(localePath('/login'))
     }
   }
