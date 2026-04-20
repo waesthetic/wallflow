@@ -22,7 +22,26 @@ export default defineNuxtConfig({
   security: {
     headers: {
       crossOriginEmbedderPolicy: false,
-      contentSecurityPolicy: false,
+      contentSecurityPolicy: {
+        'default-src': ["'self'"],
+        'script-src': ["'self'", "'nonce-{{nonce}}'", "'strict-dynamic'"],
+        'style-src': ["'self'", "'unsafe-inline'"],
+        'img-src': [
+          "'self'",
+          'https://res.cloudinary.com',
+          'https://avatars.githubusercontent.com',
+          'https://lh3.googleusercontent.com',
+          'data:',
+          'blob:',
+        ],
+        'connect-src': ["'self'", 'https://api.cloudinary.com'],
+        'font-src': ["'self'", 'data:'],
+        'object-src': ["'none'"],
+        'base-uri': ["'self'"],
+        'form-action': ["'self'"],
+        'frame-ancestors': ["'none'"],
+        'upgrade-insecure-requests': true,
+      },
       xFrameOptions: 'DENY',
       xContentTypeOptions: 'nosniff',
       referrerPolicy: 'strict-origin-when-cross-origin',
