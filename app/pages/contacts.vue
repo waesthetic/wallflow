@@ -28,12 +28,13 @@ const isLoading = ref(false)
 const isSuccess = ref(false)
 
 const toast = useToast()
+const { $csrfFetch } = useNuxtApp()
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   isLoading.value = true
 
   try {
-    await $fetch('/api/contact', {
+    await $csrfFetch('/api/contact', {
       method: 'POST',
       body: event.data
     })

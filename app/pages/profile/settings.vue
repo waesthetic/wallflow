@@ -6,6 +6,7 @@ const toast = useToast()
 
 const { user, fetch: fetchSession } = useUserSession()
 const { data } = useFetch('/api/profile/providers')
+const { $csrfFetch } = useNuxtApp()
 
 const name = ref(user.value?.name ?? '')
 const avatarUrl = ref(user.value?.avatarUrl ?? '')
@@ -16,7 +17,7 @@ useHead({ title: t('settings.label') })
 
 async function saveName() {
   try {
-    await $fetch('/api/profile/name', {
+    await $csrfFetch('/api/profile/name', {
       method: 'PATCH',
       body: { name: name.value }
     })
@@ -29,7 +30,7 @@ async function saveName() {
 
 async function saveAvatar() {
   try {
-    await $fetch('/api/profile/avatar', {
+    await $csrfFetch('/api/profile/avatar', {
       method: 'PATCH',
       body: { avatarUrl: avatarUrl.value }
     })
@@ -42,7 +43,7 @@ async function saveAvatar() {
 
 async function sendPasswordReset() {
   try {
-    await $fetch('/api/auth/forgot-password', {
+    await $csrfFetch('/api/auth/forgot-password', {
       method: 'POST',
       body: { email: user.value?.email}
     })
@@ -54,7 +55,7 @@ async function sendPasswordReset() {
 
 async function requestDeletion() {
   try {
-    await $fetch('/api/auth/delete-request', {
+    await $csrfFetch('/api/auth/delete-request', {
       method: 'POST',
       body: { email: confirmEmail.value }
     })

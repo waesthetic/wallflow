@@ -5,6 +5,7 @@ const route = useRoute()
 const localePath = useLocalePath()
 const { locale, locales, setLocale, t } = useI18n()
 const { user, clear } = useUserSession()
+const { $csrfFetch } = useNuxtApp()
 const { data } = await useProducts()
 const { count } = useCart()
 
@@ -51,7 +52,7 @@ const userMenuItems = computed(() => [[
     label: t('nav.logout'),
     icon: 'i-lucide-log-out',
     onSelect: async () => {
-      await $fetch('/api/auth/logout', { method: 'POST' })
+      await $csrfFetch('/api/auth/logout', { method: 'POST' })
       await clear()
       await navigateTo(localePath('/login'))
     }

@@ -19,11 +19,12 @@ type Schema = z.output<typeof schema>
 const state = reactive<Partial<Schema>>({ email: undefined })
 const isLoading = ref(false)
 const isSuccess = ref(false)
+const { $csrfFetch } = useNuxtApp()
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   isLoading.value = true
   try {
-    await $fetch('/api/auth/forgot-password', { method: 'POST', body: event.data })
+    await $csrfFetch('/api/auth/forgot-password', { method: 'POST', body: event.data })
     isSuccess.value = true
   }
   catch {

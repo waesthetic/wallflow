@@ -5,6 +5,7 @@ export function useAvatarUpload(onSuccess: (url: string) => Promise<void>) {
   const { t } = useI18n()
   const toast = useToast()
   const cloudName = useRuntimeConfig().public.cloudinaryCloudName
+  const { $csrfFetch } = useNuxtApp()
 
   const loading = ref(false)
   const previewUrl = ref('')
@@ -28,7 +29,7 @@ export function useAvatarUpload(onSuccess: (url: string) => Promise<void>) {
     selectedFileName.value = file.name
 
     try {
-      const { signature, timestamp, folder, apiKey } = await $fetch<{
+      const { signature, timestamp, folder, apiKey } = await $csrfFetch<{
         signature: string
         timestamp: number
         folder: string

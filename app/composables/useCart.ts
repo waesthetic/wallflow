@@ -10,6 +10,7 @@ export function useCart() {
   const toast = useToast()
   const { t } = useI18n()
   const { currency } = useCurrency()
+  const { $csrfFetch } = useNuxtApp()
 
   async function fetchCart() {
     try {
@@ -24,7 +25,7 @@ export function useCart() {
 
   async function addToCart(productId: string) {
     try {
-      await $fetch('/api/cart', {
+      await $csrfFetch('/api/cart', {
         method: 'POST',
         body: { productId }
       })
@@ -37,7 +38,7 @@ export function useCart() {
 
   async function removeFromCart(id: string) {
     try {
-      await $fetch(`/api/cart/${id}`, {
+      await $csrfFetch(`/api/cart/${id}`, {
         method: 'DELETE'
       })
       await fetchCart()

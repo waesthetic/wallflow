@@ -16,11 +16,12 @@ onMounted(() => fetchCart())
 const total = computed(() => items.value.reduce((sum, item) => sum + item.products.price, 0))
 
 const orderLoading = ref(false)
+const { $csrfFetch } = useNuxtApp()
 
 async function placeOrder() {
   orderLoading.value = true
   try {
-    const result = await $fetch<{ orderId: string }>('/api/orders', {
+    const result = await $csrfFetch<{ orderId: string }>('/api/orders', {
       method: 'POST',
       body: { currency: currency.value }
     })

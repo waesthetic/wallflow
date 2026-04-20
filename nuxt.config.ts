@@ -47,6 +47,10 @@ export default defineNuxtConfig({
       referrerPolicy: 'strict-origin-when-cross-origin',
     },
 
+    csrf: {
+      methodsToProtect: ['POST', 'PUT', 'PATCH', 'DELETE'],
+    },
+
     rateLimiter: {
       tokensPerInterval: 1000,
       interval: 60000,
