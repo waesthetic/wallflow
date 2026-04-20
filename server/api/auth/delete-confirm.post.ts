@@ -1,4 +1,4 @@
-import { eq, and, gt } from "drizzle-orm";
+import { eq, and, gt, isNull } from "drizzle-orm";
 import { z } from "zod";
 import { useDB } from "~~/server/database/client";
 import { accountDeletions, users } from "~~/server/database/schema";
@@ -22,22 +22,30 @@ export default defineEventHandler(async (event) => {
 
   const db = useDB()
 
-  const deletion = await db.query.accountDeletions.findFirst({
-    where: and(eq(accountDeletions.token, token), gt(accountDeletions.expiresAt, new Date()))
+  const deleted = await db.transaction(async (tx) => {
+    const [claimed] = await tx
+      .update(accountDeletions)
+      .set({ usedAt: new Date() })
+      .where(and(
+        eq(accountDeletions.token, token),
+        gt(accountDeletions.expiresAt, new Date()),
+        isNull(accountDeletions.usedAt),
+      ))
+      .returning()
+
+    if (!claimed) return null
+
+    await tx.delete(users).where(eq(users.id, claimed.userId))
+
+    return claimed
   })
 
-  if (!deletion) {
+  if (!deleted) {
     throw createError({
       statusCode: 400,
       message: '400 Invalid or expired link'
     })
   }
-
-  await db.transaction(async (tx) => {
-    await tx.delete(users).where(eq(users.id, deletion.userId))
-
-    await tx.delete(accountDeletions).where(eq(accountDeletions.id, deletion.id))
-  })
 
   await clearUserSession(event)
 

@@ -23,32 +23,34 @@ export default defineEventHandler(async (event) => {
   const { token, password } = parsed.data
   const db = useDB()
 
-  const resetRequest = await db.query.passwordResets.findFirst({
-    where: and(
-      eq(passwordResets.token, token),
-      gt(passwordResets.expiresAt, new Date()),
-      isNull(passwordResets.usedAt),
-    ),
+  const passwordHash = await hash(password, 12)
+
+  const reset = await db.transaction(async (tx) => {
+    const [claimed] = await tx
+      .update(passwordResets)
+      .set({ usedAt: new Date() })
+      .where(and(
+        eq(passwordResets.token, token),
+        gt(passwordResets.expiresAt, new Date()),
+        isNull(passwordResets.usedAt),
+      ))
+      .returning()
+
+    if (!claimed) return null
+
+    await tx.update(users)
+      .set({ passwordHash })
+      .where(eq(users.id, claimed.userId))
+
+    return claimed
   })
 
-  if (!resetRequest) {
+  if (!reset) {
     throw createError({
       statusCode: 400,
       message: 'Invalid or expired link'
     })
   }
-
-  const passwordHash = await hash(password, 12)
-
-  await db.transaction(async (tx) => {
-    await tx.update(users)
-      .set({ passwordHash })
-      .where(eq(users.id, resetRequest.userId))
-
-    await tx.update(passwordResets)
-      .set({ usedAt: new Date() })
-      .where(eq(passwordResets.id, resetRequest.id))
-  })
 
   return { message: 'Password changed successfully' }
 })
