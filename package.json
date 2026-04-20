@@ -8,9 +8,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:generate": "NUXT_DATABASE_URL=postgresql://postgres:postgres@localhost:5432/wallflow drizzle-kit generate",
+    "db:migrate": "NUXT_DATABASE_URL=postgresql://postgres:postgres@localhost:5432/wallflow drizzle-kit migrate",
+    "db:studio": "NUXT_DATABASE_URL=postgresql://postgres:postgres@localhost:5432/wallflow drizzle-kit studio"
   },
   "dependencies": {
     "@nuxt/fonts": "^0.14.0",
