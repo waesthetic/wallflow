@@ -1,8 +1,14 @@
+import { z } from 'zod'
 import { useDB } from "~~/server/database/client";
 import { getPreviewUrl } from "~~/server/utils/cloudinary";
 
+const querySchema = z.object({
+  locale: z.enum(['en', 'ru']).default('en'),
+  currency: z.enum(['USD', 'RUB']).default('USD'),
+})
+
 export default defineEventHandler(async (event) => {
-  const { locale, currency } = getQuery(event)
+  const { locale, currency } = querySchema.parse(getQuery(event))
 
   const db = useDB()
 

@@ -1,10 +1,16 @@
 import { eq } from "drizzle-orm";
+import { z } from 'zod'
 import { getPreviewUrl } from "~~/server/utils/cloudinary";
 import { useDB } from "~~/server/database/client";
 import { productFiles, products } from "~~/server/database/schema";
 
+const querySchema = z.object({
+  locale: z.enum(['en', 'ru']).default('en'),
+  currency: z.enum(['USD', 'RUB']).default('USD'),
+})
+
 export default defineEventHandler(async (event) => {
-  const { locale, currency } = getQuery(event)
+  const { locale, currency } = querySchema.parse(getQuery(event))
   const slug = getRouterParam(event, 'slug')
 
   if (!slug) {

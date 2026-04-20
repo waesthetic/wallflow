@@ -1,10 +1,15 @@
 import { eq } from 'drizzle-orm'
+import { z } from 'zod'
 import { useDB } from '~~/server/database/client'
 import { cartItems, products, productPrices } from '~~/server/database/schema'
 
+const querySchema = z.object({
+  currency: z.enum(['USD', 'RUB']).default('USD'),
+})
+
 export default defineEventHandler(async (event) => {
   const { user } = await requireUserSession(event)
-  const { currency } = getQuery(event)
+  const { currency } = querySchema.parse(getQuery(event))
 
   const db = useDB()
 
@@ -14,14 +19,10 @@ export default defineEventHandler(async (event) => {
     .innerJoin(products, eq(cartItems.productId, products.id))
     .where(eq(cartItems.userId, user.id))
 
-  if (!currency) {
-    return { items }
-  }
-
   const prices = await db
     .select()
     .from(productPrices)
-    .where(eq(productPrices.currency, String(currency)))
+    .where(eq(productPrices.currency, currency))
 
   const priceMap = new Map(prices.map(p => [p.productId, p.amount]))
 
