@@ -19,7 +19,7 @@ export function useCart() {
       })
       items.value = data.items
     } catch {
-      items.value = []
+      toast.add({ title: t('error.status'), color: 'error' })
     }
   }
 
