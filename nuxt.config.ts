@@ -73,6 +73,18 @@ export default defineNuxtConfig({
     '/api/auth/forgot-password': {
       security: { rateLimiter: { tokensPerInterval: 3, interval: 60000 } }
     },
+    '/api/auth/reset-password': {
+      security: { rateLimiter: { tokensPerInterval: 5, interval: 60000 } }
+    },
+    '/api/auth/verify-email': {
+      security: { rateLimiter: { tokensPerInterval: 5, interval: 60000 } }
+    },
+    '/api/auth/delete-request': {
+      security: { rateLimiter: { tokensPerInterval: 3, interval: 60000 } }
+    },
+    '/api/auth/delete-confirm': {
+      security: { rateLimiter: { tokensPerInterval: 5, interval: 60000 } }
+    },
     '/api/contact': {
       security: { rateLimiter: { tokensPerInterval: 3, interval: 60000 } }
     },
