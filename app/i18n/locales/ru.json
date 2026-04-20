@@ -194,6 +194,8 @@
     "deleteAccount": "Удалить аккаунт",
     "deleteAccountDesc": "Это действие необратимо. Введите email для подтверждения.",
     "error": "Что-то пошло не так",
+    "fileTooLarge": "Файл должен быть меньше 5 МБ",
+    "invalidFileType": "Разрешены только изображения JPEG, PNG и WebP",
     "label": "Настройки",
     "name": "Имя",
     "noConnectedAccounts": "Нет привязанных аккаунтов",

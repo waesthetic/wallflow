@@ -115,7 +115,6 @@ export default defineNuxtConfig({
 
     public: {
       cloudinaryCloudName: '',
-      cloudinaryUploadPreset: ''
     }
   },
 })

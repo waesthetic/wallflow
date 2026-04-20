@@ -2,10 +2,9 @@
 definePageMeta({ middleware: 'auth' })
 
 const { t } = useI18n()
-const localePath = useLocalePath()
 const toast = useToast()
 
-const { user, clear, fetch: fetchSession } = useUserSession()
+const { user, fetch: fetchSession } = useUserSession()
 const { data } = useFetch('/api/profile/providers')
 
 const name = ref(user.value?.name ?? '')
@@ -66,41 +65,11 @@ async function requestDeletion() {
   }
 }
 
-const cloudName = useRuntimeConfig().public.cloudinaryCloudName
-const uploadPreset = useRuntimeConfig().public.cloudinaryUploadPreset
-const avatarLoading = ref(false)
-const selectedFileName = ref('')
 const fileInput = useTemplateRef('fileInput')
-const previewUrl = ref('')
-
-async function uploadAvatar(event: Event) {
-  const file = (event.target as HTMLInputElement).files?.[0]
-  if (!file) return
-
-  selectedFileName.value = file.name
-  avatarLoading.value = true
-  previewUrl.value = URL.createObjectURL(file)
-
-  try {
-    const formData = new FormData()
-    formData.append('file', file)
-    formData.append('upload_preset', uploadPreset)
-
-    const res = await $fetch<{ secure_url: string }>(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
-      method: 'POST',
-      body: formData
-    })
-
-    avatarUrl.value = res.secure_url
-    await saveAvatar()
-    URL.revokeObjectURL(previewUrl.value)
-    previewUrl.value = ''
-  } catch {
-    toast.add({ title: t('settings.error'), color: 'error' })
-  } finally {
-    avatarLoading.value = false
-  }
-}
+const { upload: uploadAvatar, loading: avatarLoading, previewUrl, selectedFileName } = useAvatarUpload(async (url) => {
+  avatarUrl.value = url
+  await saveAvatar()
+})
 </script>
 
 <template>
