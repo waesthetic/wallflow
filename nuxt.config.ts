@@ -62,39 +62,39 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    sessionPassword: process.env.NUXT_SESSION_PASSWORD,
-    databaseUrl: process.env.DATABASE_URL,
-    resendApiKey: process.env.RESEND_API_KEY,
-    emailFrom: process.env.EMAIL_FROM || 'noreply@wallflow.app',
-    toEmail: process.env.TO_EMAIL,
-    appUrl: process.env.APP_URL || 'http://localhost:3000',
-    cloudinaryApiKey: process.env.CLOUDINARY_API_KEY,
-    cloudinaryApiSecret: process.env.CLOUDINARY_API_SECRET,
-    yookassaShopId: process.env.YOOKASSA_SHOP_ID,
-    yookassaSecretKey: process.env.YOOKASSA_SECRET_KEY,
+    sessionPassword: '',
+    databaseUrl: '',
+    resendApiKey: '',
+    emailFrom: '',
+    toEmail: '',
+    appUrl: '',
+    cloudinaryApiKey: '',
+    cloudinaryApiSecret: '',
+    yookassaShopId: '',
+    yookassaSecretKey: '',
 
     session: {
-      password: process.env.NUXT_SESSION_PASSWORD!,
+      password: '',
       cookie: {
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax'
       }
-  },
+    },
 
     oauth: {
       google: {
-        clientId: process.env.NUXT_OAUTH_GOOGLE_CLIENT_ID,
-        clientSecret: process.env.NUXT_OAUTH_GOOGLE_CLIENT_SECRET,
+        clientId: '',
+        clientSecret: '',
       },
       github: {
-        clientId: process.env.NUXT_OAUTH_GITHUB_CLIENT_ID,
-        clientSecret: process.env.NUXT_OAUTH_GITHUB_CLIENT_SECRET,
+        clientId: '',
+        clientSecret: '',
       },
     },
 
     public: {
-      cloudinaryCloudName: process.env.CLOUDINARY_CLOUD_NAME,
-      cloudinaryUploadPreset: process.env.CLOUDINARY_UPLOAD_PRESET
+      cloudinaryCloudName: '',
+      cloudinaryUploadPreset: ''
     }
   },
 })
