@@ -19,7 +19,8 @@ export const oauthAccounts = pgTable('oauth_accounts', {
   providerAccountId: text('provider_account_id').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 }, (t) => [
-  unique().on(t.provider, t.providerAccountId)
+  unique().on(t.provider, t.providerAccountId),
+  index().on(t.userId),
 ])
 
 export const emailVerification = pgTable('email_verification', {
@@ -29,7 +30,8 @@ export const emailVerification = pgTable('email_verification', {
   expiresAt: timestamp('expires_at').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 }, (t) => [
-  index().on(t.token)
+  index().on(t.token),
+  index().on(t.userId),
 ])
 
 export const passwordResets = pgTable('password_resets', {
@@ -40,7 +42,8 @@ export const passwordResets = pgTable('password_resets', {
   usedAt: timestamp('used_at'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 }, (t) => [
-  index().on(t.token)
+  index().on(t.token),
+  index().on(t.userId),
 ])
 
 export const accountDeletions = pgTable('account_deletions', {
@@ -51,7 +54,8 @@ export const accountDeletions = pgTable('account_deletions', {
   usedAt: timestamp('used_at'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 }, (t) => [
-  index().on(t.token)
+  index().on(t.token),
+  index().on(t.userId),
 ])
 
 export const products = pgTable('products', {
@@ -71,14 +75,18 @@ export const productTranslations = pgTable('product_translations', {
   title: text('title').notNull(),
   description: text('description'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-})
+}, (t) => [
+  index().on(t.productId),
+])
 
 export const productFiles = pgTable('product_files', {
   id: uuid('id').primaryKey().defaultRandom(),
   productId: uuid('product_id').references(() => products.id, { onDelete: 'cascade' }).notNull(),
   name: text('name').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-})
+}, (t) => [
+  index().on(t.productId),
+])
 
 export const productPrices = pgTable('product_prices', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -87,7 +95,8 @@ export const productPrices = pgTable('product_prices', {
   amount: integer('amount').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull()
 }, (t) => [
-  unique().on(t.productId, t.currency)
+  unique().on(t.productId, t.currency),
+  index().on(t.productId),
 ])
 
 export const cartItems = pgTable('cart_items', {
@@ -96,7 +105,9 @@ export const cartItems = pgTable('cart_items', {
   productId: uuid('product_id').references(() => products.id, { onDelete: 'cascade' }).notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 }, (t) => [
-  unique().on(t.userId, t.productId)
+  unique().on(t.userId, t.productId),
+  index().on(t.userId),
+  index().on(t.productId),
 ])
 
 export const orderStatusEnum = pgEnum('order_status', ['pending', 'paid', 'completed', 'failed'])
@@ -112,7 +123,9 @@ export const orders = pgTable('orders', {
   paymentStatus: text('payment_status'),
   paidAt: timestamp('paid_at'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-})
+}, (t) => [
+  index().on(t.userId),
+])
 
 export const orderItems = pgTable('order_items', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -120,7 +133,10 @@ export const orderItems = pgTable('order_items', {
   productId: uuid('product_id').references(() => products.id, { onDelete: 'cascade' }).notNull(),
   price: integer('price').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
-})
+}, (t) => [
+  index().on(t.orderId),
+  index().on(t.productId),
+])
 
 export type User = typeof users.$inferSelect
 export type NewUser = typeof users.$inferInsert
