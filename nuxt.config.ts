@@ -36,6 +36,7 @@ export default defineNuxtConfig({
         ],
         'connect-src': ["'self'", 'https://api.cloudinary.com'],
         'font-src': ["'self'", 'data:'],
+        'script-src-attr': ["'unsafe-hashes'", "'sha256-bwK6T5wZVTANitXbrTsel7kl/PyCjCd/Dq5Qoz3imjM='"],
         'object-src': ["'none'"],
         'base-uri': ["'self'"],
         'form-action': ["'self'"],

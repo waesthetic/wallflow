@@ -1,7 +1,4 @@
 <script setup lang="ts">
-const { fetch: refreshSession } = useUserSession()
-await refreshSession()
-
 const colorMode = useColorMode()
 const color = computed(() => colorMode.value === 'dark' ? '#020618' : 'white')
 
