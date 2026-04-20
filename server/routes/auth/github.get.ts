@@ -2,6 +2,7 @@ import { eq, and } from 'drizzle-orm'
 import { useDB } from '~~/server/database/client'
 import { users, oauthAccounts } from '~~/server/database/schema'
 import type { User } from '~~/server/database/schema'
+import { PROVIDERS } from '~~/server/utils/constants'
 
 export default defineOAuthGitHubEventHandler({
   config: {
@@ -31,7 +32,7 @@ export default defineOAuthGitHubEventHandler({
 
     const existingAccount = await db.query.oauthAccounts.findFirst({
       where: and(
-        eq(oauthAccounts.provider, 'github'),
+        eq(oauthAccounts.provider, PROVIDERS.GITHUB),
         eq(oauthAccounts.providerAccountId, providerAccountId),
       ),
       with: { user: true },
@@ -67,14 +68,14 @@ export default defineOAuthGitHubEventHandler({
           })
         }
 
-        await tx.insert(oauthAccounts).values({ userId: newUser.id, provider: 'github', providerAccountId })
+        await tx.insert(oauthAccounts).values({ userId: newUser.id, provider: PROVIDERS.GITHUB, providerAccountId })
         return newUser
       }
 
       if (!byEmail.emailVerified) {
         await tx.update(users).set({ emailVerified: true }).where(eq(users.id, byEmail.id))
       }
-      await tx.insert(oauthAccounts).values({ userId: byEmail.id, provider: 'github', providerAccountId })
+      await tx.insert(oauthAccounts).values({ userId: byEmail.id, provider: PROVIDERS.GITHUB, providerAccountId })
       return byEmail
     })
 

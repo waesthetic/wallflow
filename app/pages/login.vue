@@ -36,11 +36,12 @@ const state = reactive<Partial<Schema>>({
 const isLoading = ref(false)
 const oauthLoading = ref<string | null>(null)
 const { fetch: refreshSession } = useUserSession()
+const { $csrfFetch } = useNuxtApp()
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   isLoading.value = true
   try {
-    await $fetch('/api/auth/login', { method: 'POST', body: event.data })
+    await $csrfFetch('/api/auth/login', { method: 'POST', body: event.data })
     await refreshSession()
     await navigateTo(localePath('/profile'))
   }

@@ -1,4 +1,4 @@
-import { eq, and } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { z } from 'zod'
 import { useDB } from "~~/server/database/client";
 import { cartItems, products } from "~~/server/database/schema";
@@ -30,22 +30,21 @@ export default defineEventHandler(async (event) => {
   if (!item) {
     throw createError({
       statusCode: 404,
-      message: "404 Not Found"
+      message: "Product not found"
     })
   }
 
-  const duplicate = await db.query.cartItems.findFirst({
-    where: and(eq(cartItems.userId, user.id), eq(cartItems.productId, productId))
-  })
+  const [inserted] = await db.insert(cartItems)
+    .values({ userId: user.id, productId })
+    .onConflictDoNothing()
+    .returning({ id: cartItems.id })
 
-  if (duplicate) {
+  if (!inserted) {
     throw createError({
       statusCode: 409,
-      message: '409 Found Duplicate'
+      message: 'Found duplicate'
     })
   }
-
-  await db.insert(cartItems).values({ userId: user.id, productId })
 
   return { message: 'Items added' }
 })

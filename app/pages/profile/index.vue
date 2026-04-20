@@ -15,19 +15,16 @@ const quickLinks = navLinks.filter(l =>
   ['/', '/cart', '/profile/orders', '/profile/settings'].includes(l.to)
 )
 
-const greeting = ref('')
-
-function updateGreeting() {
+const greeting = computed(() => {
   const hour = new Date().getHours()
   const name = user.value?.name || user.value?.email || t('nav.user')
-  if (hour >= 5 && hour < 11) greeting.value = t('profile.morning') + name
-  else if (hour >= 11 && hour < 17) greeting.value = t('profile.afternoon') + name
-  else if (hour >= 17 && hour < 23) greeting.value = t('profile.evening') + name
-  else greeting.value = t('profile.night') + name
-}
+  if (hour >= 5 && hour < 11) return t('profile.morning') + name
+  if (hour >= 11 && hour < 17) return t('profile.afternoon') + name
+  if (hour >= 17 && hour < 23) return t('profile.evening') + name
+  return t('profile.night') + name
+})
 
 onMounted(() => {
-  updateGreeting()
   if (route.query.verified === 'true') {
     toast.add({ title: t('auth.verifyEmailSuccess'), color: 'success' })
   }

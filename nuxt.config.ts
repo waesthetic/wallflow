@@ -22,10 +22,34 @@ export default defineNuxtConfig({
   security: {
     headers: {
       crossOriginEmbedderPolicy: false,
-      contentSecurityPolicy: false,
+      contentSecurityPolicy: {
+        'default-src': ["'self'"],
+        'script-src': ["'self'", "'nonce-{{nonce}}'", "'strict-dynamic'"],
+        'style-src': ["'self'", "'unsafe-inline'"],
+        'img-src': [
+          "'self'",
+          'https://res.cloudinary.com',
+          'https://avatars.githubusercontent.com',
+          'https://lh3.googleusercontent.com',
+          'data:',
+          'blob:',
+        ],
+        'connect-src': ["'self'", 'https://api.cloudinary.com'],
+        'font-src': ["'self'", 'data:'],
+        'script-src-attr': ["'unsafe-hashes'", "'sha256-bwK6T5wZVTANitXbrTsel7kl/PyCjCd/Dq5Qoz3imjM='"],
+        'object-src': ["'none'"],
+        'base-uri': ["'self'"],
+        'form-action': ["'self'"],
+        'frame-ancestors': ["'none'"],
+        'upgrade-insecure-requests': true,
+      },
       xFrameOptions: 'DENY',
       xContentTypeOptions: 'nosniff',
       referrerPolicy: 'strict-origin-when-cross-origin',
+    },
+
+    csrf: {
+      methodsToProtect: ['POST', 'PUT', 'PATCH', 'DELETE'],
     },
 
     rateLimiter: {
@@ -49,6 +73,18 @@ export default defineNuxtConfig({
     },
     '/api/auth/forgot-password': {
       security: { rateLimiter: { tokensPerInterval: 3, interval: 60000 } }
+    },
+    '/api/auth/reset-password': {
+      security: { rateLimiter: { tokensPerInterval: 5, interval: 60000 } }
+    },
+    '/api/auth/verify-email': {
+      security: { rateLimiter: { tokensPerInterval: 5, interval: 60000 } }
+    },
+    '/api/auth/delete-request': {
+      security: { rateLimiter: { tokensPerInterval: 3, interval: 60000 } }
+    },
+    '/api/auth/delete-confirm': {
+      security: { rateLimiter: { tokensPerInterval: 5, interval: 60000 } }
     },
     '/api/contact': {
       security: { rateLimiter: { tokensPerInterval: 3, interval: 60000 } }
@@ -76,8 +112,10 @@ export default defineNuxtConfig({
     session: {
       password: '',
       cookie: {
+        httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'lax'
+        sameSite: 'lax',
+        maxAge: 60 * 60 * 24 * 30
       }
     },
 
@@ -94,7 +132,6 @@ export default defineNuxtConfig({
 
     public: {
       cloudinaryCloudName: '',
-      cloudinaryUploadPreset: ''
     }
   },
 })

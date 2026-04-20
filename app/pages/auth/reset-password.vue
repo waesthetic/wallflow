@@ -31,11 +31,12 @@ const state = reactive<Partial<Schema>>({
 
 const isLoading = ref(false)
 const isSuccess = ref(false)
+const { $csrfFetch } = useNuxtApp()
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   isLoading.value = true
   try {
-    await $fetch('/api/auth/reset-password', {
+    await $csrfFetch('/api/auth/reset-password', {
       method: 'POST',
       body: { token, password: event.data.password },
     })

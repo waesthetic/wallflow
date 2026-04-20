@@ -3,8 +3,8 @@ services:
     restart: unless-stopped
     build:
       context: .
-      args:
-        REDIS_URL: ${REDIS_URL}
+      secrets:
+        - redis_url
     ports:
       - "3000:3000"
     env_file:
@@ -48,6 +48,10 @@ services:
 
   redis:
     image: redis:7-alpine
+
+secrets:
+  redis_url:
+    environment: REDIS_URL
 
 volumes:
   postgres_data:

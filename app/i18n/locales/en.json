@@ -194,6 +194,8 @@
     "deleteAccount": "Delete account",
     "deleteAccountDesc": "This action is irreversible. Type your email to confirm.",
     "error": "Something went wrong",
+    "fileTooLarge": "File must be smaller than 5 MB",
+    "invalidFileType": "Only JPEG, PNG and WebP images are allowed",
     "label": "Settings",
     "name": "Name",
     "noConnectedAccounts": "No connected accounts",
