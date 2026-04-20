@@ -3,10 +3,11 @@ import { z } from 'zod'
 import { getPreviewUrl } from "~~/server/utils/cloudinary";
 import { useDB } from "~~/server/database/client";
 import { products } from "~~/server/database/schema";
+import { CURRENCIES } from '~~/server/utils/constants'
 
 const querySchema = z.object({
   locale: z.enum(['en', 'ru']).default('en'),
-  currency: z.enum(['USD', 'RUB']).default('USD'),
+  currency: z.enum(CURRENCIES).default('USD'),
 })
 
 export default defineEventHandler(async (event) => {
@@ -16,7 +17,7 @@ export default defineEventHandler(async (event) => {
   if (!slug) {
     throw createError({
       statusCode: 400,
-      message: '400 Invalid slug'
+      message: 'Invalid slug'
     })
   }
 

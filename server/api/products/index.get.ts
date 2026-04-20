@@ -1,10 +1,11 @@
 import { z } from 'zod'
 import { useDB } from "~~/server/database/client";
 import { getPreviewUrl } from "~~/server/utils/cloudinary";
+import { CURRENCIES } from '~~/server/utils/constants'
 
 const querySchema = z.object({
   locale: z.enum(['en', 'ru']).default('en'),
-  currency: z.enum(['USD', 'RUB']).default('USD'),
+  currency: z.enum(CURRENCIES).default('USD'),
 })
 
 export default defineEventHandler(async (event) => {

@@ -2,6 +2,7 @@ import { eq, and } from 'drizzle-orm'
 import { useDB } from '~~/server/database/client'
 import { users, oauthAccounts } from '~~/server/database/schema'
 import type { User } from '~~/server/database/schema'
+import { PROVIDERS } from '~~/server/utils/constants'
 
 export default defineOAuthGoogleEventHandler({
   config: {
@@ -15,7 +16,7 @@ export default defineOAuthGoogleEventHandler({
 
     const existingAccount = await db.query.oauthAccounts.findFirst({
       where: and(
-        eq(oauthAccounts.provider, 'google'),
+        eq(oauthAccounts.provider, PROVIDERS.GOOGLE),
         eq(oauthAccounts.providerAccountId, providerAccountId),
       ),
       with: { user: true },
@@ -50,14 +51,14 @@ export default defineOAuthGoogleEventHandler({
           })
         }
 
-        await tx.insert(oauthAccounts).values({ userId: newUser.id, provider: 'google', providerAccountId })
+        await tx.insert(oauthAccounts).values({ userId: newUser.id, provider: PROVIDERS.GOOGLE, providerAccountId })
         return newUser
       }
 
       if (!byEmail.emailVerified) {
         await tx.update(users).set({ emailVerified: true }).where(eq(users.id, byEmail.id))
       }
-      await tx.insert(oauthAccounts).values({ userId: byEmail.id, provider: 'google', providerAccountId })
+      await tx.insert(oauthAccounts).values({ userId: byEmail.id, provider: PROVIDERS.GOOGLE, providerAccountId })
       return byEmail
     })
 

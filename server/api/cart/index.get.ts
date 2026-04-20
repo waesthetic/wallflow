@@ -2,9 +2,10 @@ import { eq, and } from 'drizzle-orm'
 import { z } from 'zod'
 import { useDB } from '~~/server/database/client'
 import { cartItems, products, productPrices } from '~~/server/database/schema'
+import { CURRENCIES } from '~~/server/utils/constants'
 
 const querySchema = z.object({
-  currency: z.enum(['USD', 'RUB']).default('USD'),
+  currency: z.enum(CURRENCIES).default('USD'),
 })
 
 export default defineEventHandler(async (event) => {

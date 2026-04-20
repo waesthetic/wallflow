@@ -2,11 +2,12 @@ import { eq } from "drizzle-orm"
 import { z } from "zod"
 import { useDB } from "~~/server/database/client"
 import { cartItems, products, productPrices, orders, orderItems } from "~~/server/database/schema"
+import { CURRENCIES } from '~~/server/utils/constants'
 
 export default defineEventHandler(async (event) => {
   const { user } = await requireUserSession(event)
   const { currency } = await readValidatedBody(event, z.object({
-    currency: z.enum(['RUB', 'USD']).default('RUB')
+    currency: z.enum(CURRENCIES).default('RUB')
   }).parse)
 
   const db = useDB()
