@@ -5,6 +5,8 @@ type CartItemWithProduct = {
   products: Product
 }
 
+const ws = import.meta.client ? new WebSocket(`${location.protocol === 'https:' ? 'wss:' : 'ws:'}//${location.host}/ws/cart`) : null
+
 export function useCart() {
   const toast = useToast()
   const { t } = useI18n()
@@ -19,13 +21,24 @@ export function useCart() {
     { watch: [currency] }
   )
 
+  if (ws) {
+    ws.onmessage = () => refresh()
+  }
+
   const items = computed(() => data.value?.items ?? [])
   const count = computed(() => items.value.length)
+
+  function notifyOtherTabs() {
+    if (ws?.readyState === WebSocket.OPEN) {
+      ws.send('updated')
+    }
+  }
 
   async function addToCart(productId: string) {
     try {
       await $csrfFetch('/api/cart', { method: 'POST', body: { productId } })
       await refresh()
+      notifyOtherTabs()
       toast.add({ title: t('cart.itemAdded'), color: 'success' })
     } catch {
       toast.add({ title: t('error.status'), color: 'error' })
@@ -36,6 +49,7 @@ export function useCart() {
     try {
       await $csrfFetch(`/api/cart/${id}`, { method: 'DELETE' })
       await refresh()
+      notifyOtherTabs()
       toast.add({ title: t('cart.itemRemoved'), color: 'success' })
     } catch {
       toast.add({ title: t('error.status'), color: 'error' })
