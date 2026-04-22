@@ -6,7 +6,7 @@ export default defineWebSocketHandler({
       peer.context.topic = topic
       peer.subscribe(topic)
     } catch {
-      peer.close(4001, 'Unauthorized')
+      peer.close(401, 'Unauthorized')
     }
   },
 
